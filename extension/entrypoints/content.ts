@@ -6,6 +6,11 @@ export default defineContentScript({
     'https://*.slack.com/*',
     'https://teams.microsoft.com/*',
     'https://*.teams.microsoft.com/*',
+    'https://teams.live.com/v2*',
+    'https://teams.live.com/*',
+    'https://*.teams.live.com/*',
+    'https://teams.cloud.microsoft/*',
+    'https://*.teams.cloud.microsoft/*',
     'https://github.com/*',
     'https://*.github.com/*',
   ],
@@ -36,7 +41,7 @@ export default defineContentScript({
     let activePrompt: HTMLElement | null = null;
 
     const editorSelector =
-      'textarea, input, [contenteditable="true"], [role="textbox"]';
+      'textarea, input, [contenteditable]:not([contenteditable="false"]), [role="textbox"]';
 
     function getEditor(
       target: EventTarget | null,
@@ -51,7 +56,8 @@ export default defineContentScript({
         (candidate): candidate is HTMLElement =>
           candidate instanceof HTMLElement &&
           (candidate.matches(editorSelector) ||
-            candidate.closest<HTMLElement>(editorSelector) !== null),
+            candidate.closest<HTMLElement>(editorSelector) !== null ||
+            candidate.isContentEditable),
       );
 
       if (!editor) {
@@ -60,7 +66,10 @@ export default defineContentScript({
 
       const matchedEditor = editor.matches(editorSelector)
         ? editor
-        : editor.closest<HTMLElement>(editorSelector);
+        : editor.closest<HTMLElement>(editorSelector) ??
+          (editor.isContentEditable
+            ? editor.closest<HTMLElement>('[contenteditable]') ?? editor
+            : null);
 
       if (!matchedEditor || !matchedEditor.isConnected) {
         return null;

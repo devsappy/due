@@ -13,7 +13,7 @@ const app = document.querySelector<HTMLDivElement>('#app')!;
 function render(tasks: OwedTask[]) {
   app.replaceChildren();
   const title = document.createElement('h1');
-  title.textContent = 'Owed';
+  title.textContent = 'Due';
   const subtitle = document.createElement('p');
   subtitle.className = 'subtitle';
   subtitle.textContent = `${tasks.length} captured task${tasks.length === 1 ? '' : 's'}`;
