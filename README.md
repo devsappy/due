@@ -282,6 +282,19 @@ Validation will begin with a short 20-second screen capture demonstrating real-t
 
 ---
 
+## Landing Page Development
+
+The promotional web landing page is located in the `frontend/` directory:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+---
+
 ## License
 
 *Proprietary — All rights reserved. Licensing terms will be finalized prior to public distribution.*
+
