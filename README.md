@@ -1,6 +1,6 @@
 <div align="center">
 
-# Owed
+# Due
 ### *A Promise Tracker That Fills Itself In*
 
 A lightweight macOS menu-bar app that automatically captures the commitments you make across Slack, WhatsApp, and Gmail — keeping you accountable without maintaining yet another to-do list.
@@ -12,7 +12,7 @@ A lightweight macOS menu-bar app that automatically captures the commitments you
 
 <br/>
 
-> **Core Principle:** Owed tracks promises **you make**, not every random task in your life. You should never have to enter commitments manually.
+> **Core Principle:** Due tracks promises **you make**, not every random task in your life. You should never have to enter commitments manually.
 
 </div>
 
@@ -47,7 +47,7 @@ Every day, informal commitments slip through the cracks of daily communication:
 
 - **Traditional task managers fail here:** Users rarely open project management software just to record an informal promise made mid-conversation.
 - **Forgotten promises carry high costs:** Damaged trust with clients, stalled colleagues, and reactive follow-ups.
-- **The Owed Solution:** Convert fleeting conversational promises into an organized, lightweight, and automatically maintained commitment record.
+- **The Due Solution:** Convert fleeting conversational promises into an organized, lightweight, and automatically maintained commitment record.
 
 ---
 
@@ -65,11 +65,11 @@ flowchart LR
 ```
 
 1. **Write normally:** Compose messages as you always do.
-2. **Instant detection:** Owed identifies commitments and displays a subtle 2-second confirmation chip near your cursor.
+2. **Instant detection:** Due identifies commitments and displays a subtle 2-second confirmation chip near your cursor.
 3. **Instant undo (`⌘Z`):** Made an error or triggered an unwanted detection? One keystroke cancels the capture.
 4. **Glanceable menu-bar counter:** View pending promises (`2 due today`) directly in your macOS menu bar.
 5. **Direct thread deep-linking:** Click any item to return directly to the originating Slack channel, WhatsApp conversation, or email thread.
-6. **Smart closure prompts:** When you subsequently send a deliverable, Owed asks: *"Did this close it?"* — resolve with one click.
+6. **Smart closure prompts:** When you subsequently send a deliverable, Due asks: *"Did this close it?"* — resolve with one click.
 7. **Monday morning executive digest:** Start each week with a concise summary of promises kept, open obligations, and contacts awaiting responses.
 
 ---
@@ -88,7 +88,7 @@ flowchart LR
 ### 2. macOS Menu-Bar Tray
 ```text
 ┌────────────────────────────────────────────────────────┐
-│  Owed                                       2 due today│
+│  Due                                       2 due today│
 ├────────────────────────────────────────────────────────┤
 │  OVERDUE                                               │
 │  • Follow up on proposal with Sarah       (Yesterday)  │
@@ -107,7 +107,7 @@ flowchart LR
 ### 3. Fulfill and Close Suggestion
 ```text
 ┌────────────────────────────────────────────────────────┐
-│ Owed: Fulfillment Detected                             │
+│ Due: Fulfillment Detected                             │
 │ "Looks like you just sent Rahul a keynote deck.        │
 │  Did this fulfill your Friday commitment?"             │
 │                                                        │
@@ -125,7 +125,7 @@ flowchart LR
 | **Promise Capture** | Outgoing promises you make | Track promises made to you | Shared team commitments |
 | **Supported Apps** | Slack, WhatsApp Desktop, Gmail | Apple Mail, Notion, Teams | Universal accessibility |
 | **Inference Engine** | Local on-device NLP (CoreML / Foundation) | On-device + Hybrid | Custom fine-tuned adapters |
-| **Storage** | Local SQLite (`~/.owed/owed.db`) | Optional encrypted iCloud Sync | Team workspace sync |
+| **Storage** | Local SQLite (`~/.Due/Due.db`) | Optional encrypted iCloud Sync | Team workspace sync |
 | **GitHub Integration** | Deferred | Review & PR status tracking | CI/CD build failure alerts |
 | **Reminders** | Native macOS notifications | Smart calendar suggestions | Voice assistant / Bot check-ins |
 
@@ -144,7 +144,7 @@ flowchart LR
                     │ (Accessibility API)               │ (Browser Extension)
                     ▼                                   ▼
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                        OWED CAPTURE ENGINE                              │
+│                        Due CAPTURE ENGINE                              │
 │  • Detects focused outgoing input field only                            │
 │  • Triggers on message submission / send event                          │
 │  • Strict zero-screen-scraping policy                                   │
@@ -174,7 +174,7 @@ flowchart LR
 
 ## Data Model
 
-Stored in local SQLite (`~/.owed/owed.db`):
+Stored in local SQLite (`~/.Due/Due.db`):
 
 | Column | Type | Description | Example |
 | :--- | :--- | :--- | :--- |
@@ -195,11 +195,11 @@ Stored in local SQLite (`~/.owed/owed.db`):
 ## Privacy and Trust by Design
 
 > [!NOTE]
-> Privacy is the foundational design requirement of Owed. Because Owed operates alongside daily communications, trust must be absolute.
+> Privacy is the foundational design requirement of Due. Because Due operates alongside daily communications, trust must be absolute.
 
 - **On-Device Exclusivity:** Parsing and data persistence run entirely locally. User text is never transmitted to cloud LLMs or external servers.
-- **Outgoing Only:** Owed inspects only text actively typed and submitted by the user. It explicitly ignores incoming messages and feeds from others.
-- **No Screen Ingestion:** Owed does not take background screenshots, record global keystrokes, or run OCR across the display.
+- **Outgoing Only:** Due inspects only text actively typed and submitted by the user. It explicitly ignores incoming messages and feeds from others.
+- **No Screen Ingestion:** Due does not take background screenshots, record global keystrokes, or run OCR across the display.
 - **Instant Undo and Erasure:** Every logged item can be revoked within seconds via `⌘Z` or permanently deleted from SQLite at any time.
 - **Radical Transparency:** The onboarding process clearly explains required permissions (macOS Accessibility) and includes test verification before activation.
 
@@ -228,7 +228,7 @@ Stored in local SQLite (`~/.owed/owed.db`):
 ### Phase 2: Core MVP
 - [ ] Native Swift/AppKit menu-bar daemon and status item.
 - [ ] Cursor confirmation chip with 3-second `⌘Z` undo hook.
-- [ ] SQLite database implementation (`owed.db`) with migrations and encryption.
+- [ ] SQLite database implementation (`Due.db`) with migrations and encryption.
 - [ ] Due / Upcoming / Overdue popover view with thread deep links.
 - [ ] Native macOS notification scheduler.
 - [ ] One-click completion prompt on subsequent message or file activity.
